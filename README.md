@@ -59,6 +59,16 @@ sudo apt full-upgrade
 sudo apt --purge autoremove
 ```
 
+### `cups` ruhig stellen
+```
+systemctl stop cups
+systemctl stop cups-browsed
+```
+```
+systemctl disable cups
+systemctl disable cups-browsed
+```
+
 ### `.bashrc` anpassen
 ```
 alias="sudo apt clean && sudo apt update && sudo apt full-upgrade && sudo apt --purge autoremove"
