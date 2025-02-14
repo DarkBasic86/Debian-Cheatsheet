@@ -69,12 +69,12 @@ sudo apt --purge autoremove
 
 ### `cups` ruhig stellen
 ```
-systemctl stop cups
-systemctl stop cups-browsed
+sudo systemctl stop cups
+sudo systemctl stop cups-browsed
 ```
 ```
-systemctl disable cups
-systemctl disable cups-browsed
+sudo systemctl disable cups
+sudo systemctl disable cups-browsed
 ```
 
 ### `.bashrc` anpassen
