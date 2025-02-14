@@ -48,6 +48,11 @@ deb http://deb.debian.org/debian/ trixie-backports main contrib non-free non-fre
 #deb-src http://deb.debian.org/debian/ trixie-backports main contrib non-free non-free-firmware
 ```
 
+Eventluell noch die `i386` Pakete hinzufügen
+```
+sudo dpkg --add-architecture i386
+```
+
 Einmal alles durchstarten
 ```
 sudo apt clean
