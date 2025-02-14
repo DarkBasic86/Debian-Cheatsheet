@@ -79,7 +79,10 @@ sudo systemctl disable cups-browsed
 
 ### `.bashrc` anpassen
 ```
-alias="sudo apt clean && sudo apt update && sudo apt full-upgrade && sudo apt --purge autoremove"
+nano .bashrc
+```
+```
+alias aktualisieren="sudo apt clean && sudo apt update && sudo apt full-upgrade && sudo apt --purge autoremove"
 ```
 
 ## Sinnvolle Pakete
