@@ -26,6 +26,9 @@ sudo nano /etc/default/grub
 ```
 GRUB_CMDLINE_LINUX_DEFAULT="quiet splash net.ifnames=0 biosdevname=0 ipv6.disable=1"
 ```
+```
+sudo update-grub && sudo reboot
+```
 
 ### `sources.list` anpassen
 ```
