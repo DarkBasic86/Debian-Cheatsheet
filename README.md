@@ -19,12 +19,17 @@ darky  ALL=(ALL:ALL) NOPASSWD: ALL
 ```
 Der Parameter `NOPASSWD:` ermöglicht es, dass dieser User nicht jede Sitzung sein Passwort eingeben muss.
 
+### `swap` ausschalten
+```
+sudo swapoff -a
+```
+
 ### `GRUB` anpassen
 ```
 sudo nano /etc/default/grub
 ```
 ```
-GRUB_CMDLINE_LINUX_DEFAULT="quiet splash net.ifnames=0 biosdevname=0 ipv6.disable=1"
+GRUB_CMDLINE_LINUX_DEFAULT="quiet splash net.ifnames=0 biosdevname=0 ipv6.disable=1 systemd.swap=0"
 ```
 ```
 sudo update-grub && sudo reboot
