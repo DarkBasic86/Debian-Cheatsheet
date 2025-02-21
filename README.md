@@ -1,6 +1,17 @@
 # Debian-Cheatsheet
 Sammlung an Befehlen und Configs rund um Debian.
 
+## Inhaltsverzeichniss
+- [Direkt nach der Installation](#direkt-nach-der-installation)
+  * [`$PATH` richtig definieren](#path-richtig-definieren)
+  * [`sudo` erlauben](#sudo-erlauben)
+  * [`swap` ausschalten](#swap-ausschalten)
+  * [`GRUB` anpassen](#grub-anpassen)
+  * [`sources.list` anpassen](#sourceslist-anpassen)
+  * [`cups` ruhig stellen](#cups-ruhig-stellen)
+  * [`.bashrc` anpassen](#bashrc-anpassen)
+- [Sinnvolle Pakete](#sinnvolle-pakete)
+
 ## Direkt nach der Installation
 Mit `su` in den `root` User wechseln:
 
@@ -56,6 +67,14 @@ deb http://deb.debian.org/debian/ trixie-backports main contrib non-free non-fre
 Eventluell noch die `i386` Pakete hinzufügen
 ```
 sudo dpkg --add-architecture i386
+```
+
+Man kann auch checken, welche Haupt und Zusätliche Architekturen isntalliert sind.
+```
+dpkg --print-architecture
+```
+```
+dpkg --print-foreign-architecture
 ```
 
 Einmal alles durchstarten
