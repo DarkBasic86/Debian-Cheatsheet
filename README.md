@@ -42,6 +42,10 @@ sudo nano /etc/default/grub
 ```
 GRUB_CMDLINE_LINUX_DEFAULT="quiet splash net.ifnames=0 biosdevname=0 ipv6.disable=1 systemd.swap=0"
 ```
+und noch den DISABLE_OS_PROBER einkommentieren und auf `true` setzen
+```
+GRUB_DISABLE_OS_PROBER=true
+```
 ```
 sudo update-grub && sudo reboot
 ```
