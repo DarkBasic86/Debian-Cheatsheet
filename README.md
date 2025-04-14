@@ -111,5 +111,5 @@ alias aktualisieren="sudo apt clean && sudo apt update && sudo apt full-upgrade 
 
 ## Sinnvolle Pakete
 ```
-sudo apt install neofetch atop btop htop net-tools hardinfo
+sudo apt install neofetch atop btop htop bmon net-tools hardinfo hardinfo2 sl
 ```
