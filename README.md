@@ -11,7 +11,7 @@ Sammlung an Befehlen und Configs rund um Debian.
   * [`cups` ruhig stellen](#cups-ruhig-stellen)
   * [`.bashrc` anpassen](#bashrc-anpassen)
   * [SSH-Login Scripte und Banner einstellen](#ssh-login-scripte-und-banner-einstellen)
-- [eim Cinnamon Desktop den letzen User anzeigen](#beim-cinnamon-desktop-den-letzen-user-anzeigen)
+- [Beim Cinnamon Desktop den letzen User anzeigen](#beim-cinnamon-desktop-den-letzen-user-anzeigen)
 - [Sinnvolle Pakete](#sinnvolle-pakete)
 
 ## Direkt nach der Installation
