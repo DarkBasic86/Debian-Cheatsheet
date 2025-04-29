@@ -113,6 +113,44 @@ nano .bashrc
 alias aktualisieren="sudo apt clean && sudo apt update && sudo apt full-upgrade && sudo apt --purge autoremove"
 ```
 
+### SSH-Login Scripte und Banner einstellen
+Den LEGAL Text während einer SSH-Verbindung deaktivieren:
+```
+sudo nano /etc/pam.d/sshd
+```
+Folgende Zeile auskommentieren:
+```
+#session     optional     pam_motd.so noupdate
+```
+
+Um weitere Zeilen dynamisch zu generieren, muss ein zusätzliches Script angelegt werden. Beispiel:
+```
+sudo nano /etc/update_motd.d/20-neofetch
+```
+Mit folgendem Inhalt wie ein sh Script:
+```
+#!/bin/sh
+neofetch
+```
+Sie werden in numerisch aufsteigender Reihenfolge ausgeführt.
+
+Zum Schluss das Script noch ausführbar machen:
+```
+sudo chmod +x /etc/update-motd.d/20-neofetch
+```
+
+## Beim Cinnamon Desktop den letzen User anzeigen
+Mit diesem Befehl checken, ob wirklich der LightDM benutzt wird.
+```
+cat /etc/X11/default-display-manager
+```
+
+Folgende Zeile in der `/etc/lightdm/lightdm.conf` auskommentieren:
+```
+greeter-hide-users=false
+```
+
+
 ## Sinnvolle Pakete
 ```
 sudo apt install neofetch atop btop htop bmon net-tools hardinfo hardinfo2 sl
