@@ -8,8 +8,10 @@ Sammlung an Befehlen und Configs rund um Debian.
   * [`swap` ausschalten](#swap-ausschalten)
   * [`GRUB` anpassen](#grub-anpassen)
   * [`sources.list` anpassen](#sourceslist-anpassen)
+  * [`nala` installieren](#nala-installieren)
   * [`cups` ruhig stellen](#cups-ruhig-stellen)
   * [`.bashrc` anpassen](#bashrc-anpassen)
+  * [`.bash_aliases` anlegen und befüllen](#bash_aliases-anlegen-und-befüllen)
   * [SSH-Login Scripte und Banner einstellen](#ssh-login-scripte-und-banner-einstellen)
 - [Beim Cinnamon Desktop den letzen User anzeigen](#beim-cinnamon-desktop-den-letzen-user-anzeigen)
 - [Sinnvolle Pakete](#sinnvolle-pakete)
@@ -97,6 +99,12 @@ sudo apt full-upgrade
 sudo apt --purge autoremove
 ```
 
+### `nala` installieren
+Nala ist ein modernes `apt` Frontend .
+```
+sudo apt inntall nala -y
+```
+
 ### `cups` ruhig stellen
 ```
 sudo systemctl stop cups
@@ -111,8 +119,33 @@ sudo systemctl disable cups-browsed
 ```
 nano .bashrc
 ```
+
+### `.bash_aliases` anlegen und befüllen
 ```
-alias aktualisieren="sudo apt clean && sudo apt update && sudo apt full-upgrade && sudo apt --purge autoremove"
+touch .bash_aliases
+nano .bash_aliases
+```
+Folgende Befehle kann man dort eintragen:
+```
+### eigene Aliase mit Nala als APT Frontend
+alias aktualisieren='sudo nala clean && sudo nala upgrade'
+alias aufraeumen='sudo nala autopurge'
+alias herunterfahren='aktualisieren && sudo poweroff'
+alias neustarten='aktualisieren && sudo reboot'
+alias wetter='curl de.wttr.in/roth?0'
+
+### Original APT Befehle und Backups
+#alias aktualisieren='sudo apt clean && sudo apt update && sudo apt full-upgrade -u'
+#alias aufraeumen='sudo apt --purge autoremove'
+```
+Hier sind spezielle Aliase für den Raspi:
+```
+alias eeprom-updaten='sudo rpi-eeprom-update'
+alias firmware-updaten='sudo PRUNE_MODULES=1 RPI_REBOOT=1 rpi-update'
+alias padd='/home/pi/padd.sh --runonce'
+alias uphole='sudo PIHOLE_SKIP_OS_CHECK=true pihole -up'
+
+#alias padd='/home/pi/padd.sh --secret FILLSECRETHERE'
 ```
 
 ### SSH-Login Scripte und Banner einstellen
@@ -152,8 +185,30 @@ Folgende Zeile in der `/etc/lightdm/lightdm.conf` auskommentieren:
 greeter-hide-users=false
 ```
 
-
 ## Sinnvolle Pakete
 ```
-sudo apt install neofetch atop btop htop bmon net-tools hardinfo hardinfo2 sl
+neofetch
+└── Shows Linux System Information with Distribution Logo
+fastfetch
+└── neofetch-like tool for fetching system information
+atop
+└── Monitor for system resources and process activity
+btop
+└── Modern and colorful command line resource monitor that shows usage and stats
+htop
+└── interactive processes viewer
+usbtop
+└── utility to show bandwidth on USB buses and devices
+bmon
+└── portable bandwidth monitor and rate estimator
+net-tools
+└── NET-3 networking toolkit
+iperf3
+└── Internet Protocol bandwidth measuring tool
+hardinfo
+└── transitional package [hardinfo2]
+hardinfo2
+└── System Information and Benchmark for Linux Systems
+sl
+└── Correct you if you type `sl' by mistake
 ```
