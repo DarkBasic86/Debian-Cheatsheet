@@ -195,16 +195,28 @@ atop
 └── Monitor for system resources and process activity
 btop
 └── Modern and colorful command line resource monitor that shows usage and stats
+bashtop
+└── Resource monitor that shows usage and stats
 htop
 └── interactive processes viewer
+iftop
+└── displays bandwidth usage information on an network interface
+iotop
+└── simple top-like I/O monitor
 usbtop
 └── utility to show bandwidth on USB buses and devices
 bmon
 └── portable bandwidth monitor and rate estimator
+nmon
+└── performance monitoring tool for Linux
 net-tools
 └── NET-3 networking toolkit
+sysstat
+└── system performance tools for Linux
 iperf3
 └── Internet Protocol bandwidth measuring tool
+linux-perf
+└── Performance analysis tools for Linux
 hardinfo
 └── transitional package [hardinfo2]
 hardinfo2
