@@ -1,19 +1,20 @@
 # Debian-Cheatsheet
 Sammlung an Befehlen und Configs rund um Debian.
 
-## Inhaltsverzeichniss
+## Inhaltsverzeichnis
 - [Direkt nach der Installation](#direkt-nach-der-installation)
   * [`$PATH` richtig definieren](#path-richtig-definieren)
   * [`sudo` erlauben](#sudo-erlauben)
   * [`swap` ausschalten](#swap-ausschalten)
   * [`GRUB` anpassen](#grub-anpassen)
   * [`sources.list` anpassen](#sourceslist-anpassen)
+  * [`apt` modernisieren](#apt-modernisieren)
   * [`nala` installieren](#nala-installieren)
-  * [`cups` ruhig stellen](#cups-ruhig-stellen)
+  * [`cups` ruhigstellen](#cups-ruhigstellen)
   * [`.bashrc` anpassen](#bashrc-anpassen)
   * [`.bash_aliases` anlegen und befüllen](#bash_aliases-anlegen-und-befüllen)
   * [SSH-Login Scripte und Banner einstellen](#ssh-login-scripte-und-banner-einstellen)
-- [Beim Cinnamon Desktop den letzen User anzeigen](#beim-cinnamon-desktop-den-letzen-user-anzeigen)
+- [Beim Cinnamon Desktop den letzten User anzeigen](#beim-cinnamon-desktop-den-letzten-user-anzeigen)
 - [Sinnvolle Pakete](#sinnvolle-pakete)
 
 ## Direkt nach der Installation
@@ -59,53 +60,59 @@ sudo update-grub && sudo reboot
 sudo nano /etc/apt/sources.list
 ```
 ```
-deb http://deb.debian.org/debian/ trixie main contrib non-free non-free-firmware
-deb http://security.debian.org/debian/ trixie-security main contrib non-free non-free-firmware
-deb http://deb.debian.org/debian/ trixie-updates main contrib non-free non-free-firmware
-deb http://deb.debian.org/debian/ trixie-proposed-updates main contrib non-free non-free-firmware
-deb http://deb.debian.org/debian/ trixie-backports main contrib non-free non-free-firmware
+deb https://deb.debian.org/debian/ trixie main contrib non-free non-free-firmware
+deb https://security.debian.org/debian/ trixie-security main contrib non-free non-free-firmware
+deb https://deb.debian.org/debian/ trixie-updates main contrib non-free non-free-firmware
+deb https://deb.debian.org/debian/ trixie-proposed-updates main contrib non-free non-free-firmware
+deb https://deb.debian.org/debian/ trixie-backports main contrib non-free non-free-firmware
 
-#deb-src http://deb.debian.org/debian/ trixie main contrib non-free non-free-firmware
-#deb-src http://security.debian.org/debian/ trixie-security main contrib non-free non-free-firmware
-#deb-src http://deb.debian.org/debian/ trixie-updates main contrib non-free non-free-firmware
-#deb-src http://deb.debian.org/debian/ trixie-proposed-updates main contrib non-free non-free-firmware
-#deb-src http://deb.debian.org/debian/ trixie-backports main contrib non-free non-free-firmware
+#deb-src https://deb.debian.org/debian/ trixie main contrib non-free non-free-firmware
+#deb-src https://security.debian.org/debian/ trixie-security main contrib non-free non-free-firmware
+#deb-src https://deb.debian.org/debian/ trixie-updates main contrib non-free non-free-firmware
+#deb-src https://deb.debian.org/debian/ trixie-proposed-updates main contrib non-free non-free-firmware
+#deb-src https://deb.debian.org/debian/ trixie-backports main contrib non-free non-free-firmware
 ```
+Notiz:</br>
+Die Verwendung von `contrib` und  `non-free` ist umstritten.
+Solange alle Pakete gefunden werden und laufen, am besten weglassen.
+Wenn man jedoch einmal Pakete daraus installiert hat, kann man die Repos nicht ohne weiteres deaktivieren.
+Das kann zu Problemen später führen.
 
-Eventluell noch die `i386` Pakete hinzufügen
+Eventuell noch die `i386` Pakete hinzufügen
 ```
 sudo dpkg --add-architecture i386
 ```
 
-Man kann auch checken, welche Haupt und Zusätliche Architekturen isntalliert sind.
+Man kann auch checken, welche Haupt- und zusätzliche Architekturen installiert sind.
 ```
 dpkg --print-architecture
-```
-```
 dpkg --print-foreign-architecture
 ```
 
 Einmal alles durchstarten
 ```
 sudo apt clean
-```
-```
 sudo apt update
-```
-```
 sudo apt full-upgrade
-```
-```
 sudo apt --purge autoremove
 ```
 
-### `nala` installieren
-Nala ist ein modernes `apt` Frontend .
+### `apt` modernisieren
+Seit Debian 13 Trixie wird das neue `deb822` Format standardmäßig genutzt, ähnlich des YAML-Formats.</br>
+Es ersetzt bestehende .list-Dateien (z. B. `/etc/apt/sources.list` oder Dateien in `/etc/apt/sources.list.d/`) durch neue .sources-Dateien.
+
+Mit diesem Befehl wandelt `apt` alle aktuell gültigen Repositorys um:
 ```
-sudo apt inntall nala -y
+sudo apt modernize-sources
 ```
 
-### `cups` ruhig stellen
+### `nala` installieren
+Nala ist ein modernes `apt` Frontend.
+```
+sudo apt install nala -y
+```
+
+### `cups` ruhigstellen
 ```
 sudo systemctl stop cups
 sudo systemctl stop cups-browsed
@@ -127,6 +134,7 @@ nano .bash_aliases
 ```
 Folgende Befehle kann man dort eintragen:
 ```
+#!/bin/bash
 ### eigene Aliase mit Nala als APT Frontend
 alias aktualisieren='sudo nala clean && sudo nala upgrade'
 alias aufraeumen='sudo nala autopurge'
@@ -134,7 +142,7 @@ alias herunterfahren='aktualisieren && sudo poweroff'
 alias neustarten='aktualisieren && sudo reboot'
 alias wetter='curl de.wttr.in/roth?0'
 
-### Original APT Befehle und Backups
+### original APT Befehle und Backups
 #alias aktualisieren='sudo apt clean && sudo apt update && sudo apt full-upgrade -u'
 #alias aufraeumen='sudo apt --purge autoremove'
 ```
@@ -158,14 +166,14 @@ Folgende Zeile auskommentieren:
 #session     optional     pam_motd.so noupdate
 ```
 
-Um weitere Zeilen dynamisch zu generieren, muss ein zusätzliches Script angelegt werden. Beispiel:
+Um weitere Zeilen dynamisch zu generieren, muss ein zusätzliches Script angelegt werden.
 ```
-sudo nano /etc/update_motd.d/20-neofetch
+sudo nano /etc/update_motd.d/20-fastfetch
 ```
 Mit folgendem Inhalt wie ein sh Script:
 ```
-#!/bin/sh
-neofetch
+#!/bin/bash
+fastfetch
 ```
 Sie werden in numerisch aufsteigender Reihenfolge ausgeführt.
 
@@ -174,7 +182,7 @@ Zum Schluss das Script noch ausführbar machen:
 sudo chmod +x /etc/update-motd.d/20-neofetch
 ```
 
-## Beim Cinnamon Desktop den letzen User anzeigen
+## Beim Cinnamon Desktop den letzten User anzeigen
 Mit diesem Befehl checken, ob wirklich der LightDM benutzt wird.
 ```
 cat /etc/X11/default-display-manager
@@ -186,15 +194,21 @@ greeter-hide-users=false
 ```
 
 ## Sinnvolle Pakete
+Must-Have:
 ```
-neofetch
-└── Shows Linux System Information with Distribution Logo
 fastfetch
 └── neofetch-like tool for fetching system information
-atop
-└── Monitor for system resources and process activity
 btop
 └── Modern and colorful command line resource monitor that shows usage and stats
+iperf3
+└── Internet Protocol bandwidth measuring tool
+sl
+└── Correct you if you type `sl' by mistake
+```
+Optional:
+```
+atop
+└── Monitor for system resources and process activity
 bashtop
 └── Resource monitor that shows usage and stats
 htop
@@ -209,18 +223,19 @@ bmon
 └── portable bandwidth monitor and rate estimator
 nmon
 └── performance monitoring tool for Linux
-net-tools
-└── NET-3 networking toolkit
 sysstat
 └── system performance tools for Linux
-iperf3
-└── Internet Protocol bandwidth measuring tool
 linux-perf
 └── Performance analysis tools for Linux
-hardinfo
-└── transitional package [hardinfo2]
 hardinfo2
 └── System Information and Benchmark for Linux Systems
-sl
-└── Correct you if you type `sl' by mistake
+```
+Depricated oder Obsolete:
+```
+neofetch
+└── Shows Linux System Information with Distribution Logo
+net-tools
+└── NET-3 networking toolkit
+hardinfo
+└── transitional package [hardinfo2]
 ```
