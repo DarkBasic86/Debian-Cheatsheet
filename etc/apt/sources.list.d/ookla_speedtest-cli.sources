@@ -1,0 +1,6 @@
+Types: deb
+URIs: https://packagecloud.io/ookla/speedtest-cli/debian/
+Suites: trixie
+Components: main
+Signed-By: /etc/apt/keyrings/ookla_speedtest-cli-archive-keyring.gpg
+Enabled: yes

@@ -1,0 +1,6 @@
+Types: deb
+URIs: https://www.deb-multimedia.org/
+Suites: forky
+Components: main non-free
+Signed-By: 
+Enabled: no

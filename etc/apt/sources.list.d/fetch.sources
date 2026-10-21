@@ -1,0 +1,13 @@
+Types: deb
+URIs:
+  https://mirror.creoline.net/debian/
+  https://mirror.plusline.net/debian/
+  https://ftp-stud.hs-esslingen.de/debian/
+Suites:
+  forky
+  forky-updates
+  forky-proposed-updates
+  forky-backports
+Components: main contrib non-free non-free-firmware
+Signed-By: /usr/share/keyrings/debian-archive-keyring.gpg
+Enabled: yes

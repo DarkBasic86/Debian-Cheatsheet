@@ -1,0 +1,6 @@
+Types: deb
+URIs: https://mkvtoolnix.download/debian/
+Suites: forky
+Components: main
+Signed-By: /etc/apt/keyrings/gpg-pub-moritzbunkus.gpg
+Enabled: no
